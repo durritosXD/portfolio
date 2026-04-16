@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --background: #0e0e0e;
+  --surface: #0e0e0e;
+  --surface-container-low: #131313;
+  --surface-container: #1a1a1a;
+  --surface-container-high: #20201f;
+  --surface-container-highest: #262626;
+  
+  --primary: #81ecff; /* Cyan */
+  --primary-container: #00e3fd;
+  --on-primary: #005762;
+  
+  --secondary: #ff7350; /* Coral */
+  --on-secondary: #440900;
+  
+  --on-surface: #ffffff;
+  --on-surface-variant: #adaaaa;
+  
+  --outline: #484847;
+  
+  --font-serif: 'Noto Serif', serif;
+  --font-sans: 'Manrope', sans-serif;
+  
+  --transition-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+  --glass: rgba(14, 14, 14, 0.7);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Kinetic Curator Aesthetics: Asymmetry & Spacing */
+.section {
+  padding: 8rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.asymmetric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+}
+
+@media (max-width: 968px) {
+  .asymmetric-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Glassmorphism */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Minimalist Inputs */
+input, textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(72, 72, 71, 0.4);
+  color: var(--on-surface);
+  padding: 1rem 0;
+  font-family: var(--font-sans);
+  width: 100%;
+  transition: border-color 0.4s var(--transition-fluid);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-bottom-color: var(--primary);
+}
+
+label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--on-surface-variant);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: transform 0.4s var(--transition-fluid);
+  font-family: var(--font-sans);
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9999;
+  transition: transform 0.15s ease-out;
+}
+
+/* Utility classes */
+.text-cyan { color: var(--primary); }
+.text-coral { color: var(--secondary); }
+.text-muted { color: var(--on-surface-variant); }
+.font-serif { font-family: var(--font-serif); }
+
+.bg-surface-low { background-color: var(--surface-container-low); }
+.bg-surface { background-color: var(--surface-container); }
+.bg-surface-high { background-color: var(--surface-container-high); }
+
+/* Timeline Styles */
+.timeline-item {
+  position: relative;
+  padding-left: 3rem;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 4rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modal-content {
+  background: var(--surface-container-high);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 1.5rem;
+  padding: 4rem;
+  position: relative;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Scrollbar styling */
+.modal-content::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--outline);
+  border-radius: 10px;
+}
