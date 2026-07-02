@@ -107,6 +107,7 @@ const Projects = () => {
         gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
         gap: '2.5rem',
       }}>
+        {projects.map((project, index) => (
           <motion.div
             key={project.id}
             onClick={() => setSelected(project)}
@@ -196,6 +197,7 @@ const Projects = () => {
               View Details <ArrowRight size={16} />
             </motion.div>
           </motion.div>
+        ))}
       </div>
 
       {/* Project drawer */}
