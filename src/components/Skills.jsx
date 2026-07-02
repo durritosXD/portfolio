@@ -111,7 +111,7 @@ const Skills = () => {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                     <motion.span
-                      whileHover={{ color: cat.color, x: 5 }}
+                      whileHover={{ color: cat.color }}
                       style={{ fontSize: '0.95rem', color: 'var(--on-surface-variant)', cursor: 'default', fontFamily: 'var(--font-serif)', transition: 'color 0.3s' }}
                     >
                       {skill.name}

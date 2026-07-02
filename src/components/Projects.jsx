@@ -107,92 +107,95 @@ const Projects = () => {
         gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
         gap: '2.5rem',
       }}>
-        {projects.map((project, index) => (
-          <TiltCard key={project.id} onClick={() => setSelected(project)} style={{ display: 'flex' }}>
+          <motion.div
+            key={project.id}
+            onClick={() => setSelected(project)}
+            className="project-card"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+            whileHover="hovered"
+            style={{
+              padding: '2.5rem',
+              borderRadius: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              minHeight: '320px',
+              cursor: 'pointer',
+              position: 'relative',
+              overflow: 'hidden',
+              background: 'var(--surface-container)',
+              border: '1px solid rgba(255,255,255,0.04)',
+            }}
+          >
+            {/* Rotating gradient border on hover */}
             <motion.div
-              className="project-card"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              whileHover="hovered"
+              className="card-glow"
+              variants={{ hovered: { opacity: 1 } }}
+              initial={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
               style={{
-                padding: '2.5rem',
-                borderRadius: '1.5rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                flex: 1,
-                minHeight: '320px',
-                cursor: 'pointer',
-                position: 'relative',
-                overflow: 'hidden',
-                background: 'var(--surface-container)',
-                border: '1px solid rgba(255,255,255,0.04)',
+                position: 'absolute', inset: '-1px', borderRadius: '1.5rem',
+                background: `conic-gradient(from 0deg, ${project.color}33, transparent, ${project.color}22, transparent, ${project.color}33)`,
+                zIndex: -1, animation: 'spin 4s linear infinite',
               }}
-            >
-              {/* Rotating gradient border on hover */}
-              <motion.div
-                className="card-glow"
-                variants={{ hovered: { opacity: 1 } }}
-                initial={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                style={{
-                  position: 'absolute', inset: '-1px', borderRadius: '1.5rem',
-                  background: `conic-gradient(from 0deg, ${project.color}33, transparent, ${project.color}22, transparent, ${project.color}33)`,
-                  zIndex: -1, animation: 'spin 4s linear infinite',
-                }}
-              />
+            />
 
-              {/* Inner glow */}
-              <motion.div
-                variants={{ hovered: { opacity: 0.07 } }}
-                initial={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                style={{
-                  position: 'absolute', top: '-50%', right: '-50%',
-                  width: '100%', height: '100%',
-                  background: `radial-gradient(circle, ${project.color}, transparent 70%)`,
-                  pointerEvents: 'none',
-                }}
-              />
+            {/* Inner glow */}
+            <motion.div
+              variants={{ hovered: { opacity: 0.07 } }}
+              initial={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              style={{
+                position: 'absolute', top: '-50%', right: '-50%',
+                width: '100%', height: '100%',
+                background: `radial-gradient(circle, ${project.color}, transparent 70%)`,
+                pointerEvents: 'none',
+              }}
+            />
 
-              {/* Background index */}
-              <div style={{
-                position: 'absolute', top: '-0.5rem', right: '1rem',
-                fontSize: '6rem', fontWeight: 900, opacity: 0.025,
-                pointerEvents: 'none', fontFamily: 'var(--font-serif)',
-                color: project.color,
-              }}>
-                {String(index + 1).padStart(2, '0')}
+            {/* Background index */}
+            <div style={{
+              position: 'absolute', top: '-0.5rem', right: '1rem',
+              fontSize: '6rem', fontWeight: 900, opacity: 0.025,
+              pointerEvents: 'none', fontFamily: 'var(--font-serif)',
+              color: project.color,
+            }}>
+              {String(index + 1).padStart(2, '0')}
+            </div>
+
+            <div>
+              <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+                {project.tech.map(t => (
+                  <span key={t} style={{
+                    fontSize: '0.58rem', padding: '0.3rem 0.8rem',
+                    background: 'var(--surface-container-highest)',
+                    borderRadius: '100px', color: project.color,
+                    textTransform: 'uppercase', letterSpacing: '0.1em',
+                    border: `1px solid ${project.color}18`,
+                  }}>{t}</span>
+                ))}
               </div>
-
-              <div>
-                <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-                  {project.tech.map(t => (
-                    <span key={t} style={{
-                      fontSize: '0.58rem', padding: '0.3rem 0.8rem',
-                      background: 'var(--surface-container-highest)',
-                      borderRadius: '100px', color: project.color,
-                      textTransform: 'uppercase', letterSpacing: '0.1em',
-                      border: `1px solid ${project.color}18`,
-                    }}>{t}</span>
-                  ))}
-                </div>
-                <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem', lineHeight: 1.1 }}>{project.title}</h3>
-                <p className="text-muted" style={{ fontSize: '0.95rem', lineHeight: 1.7 }}>{project.description}</p>
-              </div>
-
-              <motion.div
-                style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: project.color, fontWeight: 600, fontSize: '0.85rem' }}
-                variants={{ hovered: { x: 8 } }}
+              <motion.h3
+                variants={{ hovered: { color: project.color } }}
                 transition={{ duration: 0.3 }}
+                style={{ fontSize: '1.8rem', marginBottom: '1rem', lineHeight: 1.1, color: '#ffffff' }}
               >
-                View Details <ArrowRight size={16} />
-              </motion.div>
+                {project.title}
+              </motion.h3>
+              <p className="text-muted" style={{ fontSize: '0.95rem', lineHeight: 1.7 }}>{project.description}</p>
+            </div>
+
+            <motion.div
+              style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: project.color, fontWeight: 600, fontSize: '0.85rem' }}
+              variants={{ hovered: { x: 8 } }}
+              transition={{ duration: 0.3 }}
+            >
+              View Details <ArrowRight size={16} />
             </motion.div>
-          </TiltCard>
-        ))}
+          </motion.div>
       </div>
 
       {/* Project drawer */}
