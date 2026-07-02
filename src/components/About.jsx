@@ -68,7 +68,7 @@ const About = () => {
             </div>
             <div>
               <h4 className="text-cyan" style={{ fontSize: '2.5rem', fontWeight: 700 }}>
-                <AnimatedCounter target="5" suffix="+" />
+                <AnimatedCounter target="13" suffix="+" />
               </h4>
               <p className="text-muted" style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Hackathons</p>
             </div>
